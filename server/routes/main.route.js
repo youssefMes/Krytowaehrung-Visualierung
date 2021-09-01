@@ -1,7 +1,7 @@
 const router = require('express').Router()
+const cryptoController = require('../controllers/main.controller')
 
-router.get('/', function (req, res) {
-    res.send('Krypto API')
-})
+router.route('/asset/get-one')
+    .get(cryptoController.getOne);
 
 module.exports = router
