@@ -1,24 +1,29 @@
-const {StreamClient} = require("cw-sdk-node");
+const restClient = require('../client/client.factory').getRestClient()
+const streamClient = require('../client/client.factory').getStreamClient()
 
 
-const getOne = async function (req, res) {
-    const {asset} = req.query
-    const client = new StreamClient({
-        creds: {
-            apiKey: "WBES4COG9QL09T2KXOY3", // your cw api key
-            secretKey: "" // your cw secret key
-        },
-        subscriptions: [
-            "markets:87:trades", // kraken btc:usd
-            "pairs:9:performance", // btc/usd pair
-            "markets:1:trades"
-        ],
-        logLevel: "debug"
-    });
-    res.send([])
+const getAssetOHLC = async function (req, res) {
+    const {pairSymbol} = req.query
+    const response = await restClient.getOHLC('kraken', pairSymbol)
+    res.send(response)
 }
 
+const getAssetsPrice = function (req, res) {
+    const {pairs} = req.query
+    let assets = []
+    if (pairs.length > 0) {
+        try {
+            pairs.map(async (pairSymbol) => {
+                assets.push(await restClient.getPrice('kraken', pairSymbol))
+            })
+            res.send(assets)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+}
 
 module.exports = {
-    getOne
+    getAssetOHLC,
+    getAssetsPrice
 };
