@@ -11,3 +11,4 @@ cd Krytowaehrung-Visualierung/server
 yarn install or npm install
 yarn start or npm start 
 ```
+Navigate to hhtp://localhost:3000
