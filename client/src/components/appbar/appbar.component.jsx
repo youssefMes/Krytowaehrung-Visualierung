@@ -88,7 +88,7 @@ export const HeaderBar = (props) => {
                         </Grow>
                     )}
                     </Popper>
-                    <Switch checked={darkState} onChange={colorSwitch} title={displayAlt} />
+                    <Switch checked={darkState} onChange={colorSwitch} title={displayAlt} className={classes.switch}/>
                 </div>
 
             </Toolbar>

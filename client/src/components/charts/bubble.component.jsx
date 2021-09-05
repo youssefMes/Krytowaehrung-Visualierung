@@ -32,6 +32,7 @@ export default class BubbleChart extends React.Component {
         const res = await axios.get('http://localhost:9000/api/asset/price')
         this.setState({data: res.data})
     }
+    
     componentWillMount() {
         this.mounted = true;
         this.getData()
@@ -42,13 +43,13 @@ export default class BubbleChart extends React.Component {
             this.minValue =
                 0.95 *
                 d3.min(this.props.data, item => {
-                    return item.v;
+                    return item.data_symbols_count;
                 });
 
             this.maxValue =
                 1.05 *
                 d3.max(this.props.data, item => {
-                    return item.v;
+                    return item.data_symbols_count;
                 });
 
             this.simulatePositions(this.props.data);
@@ -78,7 +79,7 @@ export default class BubbleChart extends React.Component {
             .force(
                 "collide",
                 d3.forceCollide(d => {
-                    return this.radiusScale(d.v) + 2;
+                    return this.radiusScale(d.data_symbols_count) + 2;
                 })
             )
             .on("tick", () => {
@@ -92,13 +93,13 @@ export default class BubbleChart extends React.Component {
         const minValue =
             0.95 *
             d3.min(data, item => {
-                return item.v;
+                return item.data_symbols_count;
             });
 
         const maxValue =
             1.05 *
             d3.max(data, item => {
-                return item.v;
+                return item.data_symbols_count;
             });
 
         const color = d3
@@ -111,32 +112,31 @@ export default class BubbleChart extends React.Component {
         if (!this.props.useLabels) {
             const circles = _.map(data, (item, index) => {
                 return (
+                    <g
+                    transform={`translate(${item.data_symbols_count/1000}, ${item.data_symbols_count/1000})`}
+                >
                     <circle
                         key={index}
-                        r={this.radiusScale(item.v)}
+                        r={this.radiusScale(item.data_symbols_count/1000)}
                         cx={item.x}
                         cy={item.y}
-                        fill={color(item.v)}
-                        stroke={d3.rgb(color(item.v)).brighter(2)}
+                        fill={color(item.data_symbols_count)}
+                        stroke={d3.rgb(color(item.data_symbols_count)).brighter(2)}
                         strokeWidth="2"
                     />
+                    </g>
                 );
             });
 
             return (
-                <g
-                    transform={`translate(${this.props.width / 2}, ${this.props
-                        .height / 2})`}
-                >
-                    {circles}
-                </g>
+                circles
             );
         }
 
         // render circle and text elements inside a group
         const texts = _.map(data, (item, index) => {
             const props = this.props;
-            const fontSize = this.radiusScale(item.v) / 2;
+            const fontSize = this.radiusScale(item.data_symbols_count) / 2;
             return (
                 <g
                     key={index}
@@ -144,9 +144,9 @@ export default class BubbleChart extends React.Component {
                     item.x}, ${props.height / 2 + item.y})`}
                 >
                     <circle
-                        r={this.radiusScale(item.v)}
-                        fill={color(item.v)}
-                        stroke={d3.rgb(color(item.v)).brighter(2)}
+                        r={this.radiusScale(item.data_symbols_count)}
+                        fill={color(item.data_symbols_count)}
+                        stroke={d3.rgb(color(item.data_symbols_count)).brighter(2)}
                         strokeWidth="2"
                     />
                     <text
@@ -156,7 +156,7 @@ export default class BubbleChart extends React.Component {
                         fontSize={`${fontSize}px`}
                         fontWeight="bold"
                     >
-                        {item.v}
+                        {item.name}
                     </text>
                 </g>
             );

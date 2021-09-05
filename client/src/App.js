@@ -30,7 +30,7 @@ function MainApp() {
   const [darkState, setDarkState] = useState(
     localStorage.getItem('darkState') || false
   );
-
+    console.log(darkState)
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? red[500] : lightBlue[500];
   const mainSecondaryColor = darkState ? blueGrey[900] : deepPurple[500];

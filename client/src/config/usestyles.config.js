@@ -53,6 +53,12 @@ export const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  switch:{
+    float: 'right',
+    position:'absolute',
+    right:0,
+    top: '20%'
+  },
   menuBut:{
     color: 'white',
   },
