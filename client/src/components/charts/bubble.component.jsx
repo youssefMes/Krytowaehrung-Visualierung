@@ -1,7 +1,10 @@
 import React from 'react';
 import * as d3 from "d3";
 import _ from "lodash";
+import axios from 'axios'
 
+
+// todo refactor to functional component
 export default class BubbleChart extends React.Component {
     static defaultProps = {
         data: [],
@@ -18,16 +21,20 @@ export default class BubbleChart extends React.Component {
         this.mounted = false;
 
         this.state = {
-            data: [{v: 10}, {v:20}, {v:50}]
+            data: []
         };
 
         this.radiusScale = this.radiusScale.bind(this);
         this.simulatePositions = this.simulatePositions.bind(this);
         this.renderBubbles = this.renderBubbles.bind(this);
     }
-
+    getData = async () => {
+        const res = await axios.get('http://localhost:9000/api/asset/price')
+        this.setState({data: res.data})
+    }
     componentWillMount() {
         this.mounted = true;
+        this.getData()
     }
 
     componentDidMount() {
