@@ -81,8 +81,6 @@ export const HeaderBar = (props) => {
 
         prevOpen.current = open;
     }, [open]);
-    const {pathname} = history.location
-    const allowedFilterPaths = ["/paintings", "/graphics"]
     return (
         <AppBar position="fixed"
                 className={classNames(classes.appBar, {
@@ -91,34 +89,12 @@ export const HeaderBar = (props) => {
         >
             <CssBaseline />
             <Toolbar>
-
                 <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                     <Link href="/" style={{color:'white'}}>
-                        Kryptowaehrung Visualisierung
+                        Krypto-Visualisierung
                     </Link>
                 </Typography>
-                {/*** Search Box ***/}
-                {
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon/>
-                    </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            input: classes.inputInput,
-                            root: classes.inputRoot,
-                        }}
-                        inputProps={{'aria-label': 'search'}}
-                        onChange={handleSearchChange}
-                    />
-                </div>}
-                <div className={classes.grow} />
-                {/*** End Search Box ***/}
                 <div>
-                    <Button href="/">
-                        <span className={classes.menuBut}>Startseite</span>
-                    </Button>
                     <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
@@ -139,12 +115,6 @@ export const HeaderBar = (props) => {
                     <Switch checked={darkState} onChange={colorSwitch} title={displayAlt} />
                 </div>
 
-                {/*** Filter ***/}
-                {!isOpen && (allowedFilterPaths.indexOf(pathname) > -1) && <FilterListIcon
-                    className={classNames(classes.menuButton, isOpen && classes.hide)}
-                    onClick={toggle}
-                />}
-                {/*** End Filter ***/}
             </Toolbar>
         </AppBar>
     );

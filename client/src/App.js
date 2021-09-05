@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import CandleSticksChartChart from './components/candlesticks/index'
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,13 +37,13 @@ function MainApp() {
 
   const [response, setResponse] = useState("");
 
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.on("FromAPI", data => {
-      console.log(data)
-      setResponse(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const socket = socketIOClient(ENDPOINT);
+  //   socket.on("FromAPI", data => {
+  //     console.log(data)
+  //     setResponse(data);
+  //   });
+  // }, []);
 
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? red[500] : lightBlue[500];
@@ -86,9 +87,9 @@ function MainApp() {
             {/*** LANDING PAGE ***/}
             <Route path="/">
               <div>
-                
+              <CandleSticksChartChart/>
               </div>
- 
+
             </Route>
             {/*** END LANDING PAGE ***/}
 

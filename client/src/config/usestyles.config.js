@@ -1,4 +1,4 @@
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { alpha as fade, makeStyles } from '@material-ui/core/styles';
 const drawerWidth = 320;
 
 export const useStyles = makeStyles((theme) => ({

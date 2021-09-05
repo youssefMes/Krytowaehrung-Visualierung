@@ -1,31 +1,14 @@
 const express = require('express')
+const cors = require('cors')
 const routes = require('./routes/main.route')
 const app = express()
-const server = require('http').createServer(app);
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        credentials: true
-    }
-});
+app.use(cors())
+
 const port = process.env.PORT || 9000
 
 app.use('/api', routes)
-
-
 let interval;
 
-io.on("connection", (socket) => {
-    console.log("New client connected");
-    if (interval) {
-        clearInterval(interval);
-    }
-    interval = setInterval(() => getApiAndEmit(socket), 1000);
-    socket.on("disconnect", () => {
-        console.log("Client disconnected");
-        clearInterval(interval);
-    });
-});
 const getApiAndEmit = socket => {
     // const client = new RESTClient({
     //     creds: {
@@ -43,5 +26,7 @@ const getApiAndEmit = socket => {
     // Emitting a new message. Will be consumed by the client
 };
 
-
-server.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
+//server.listen(port, () => console.log(`Listening on port ${port}`));
