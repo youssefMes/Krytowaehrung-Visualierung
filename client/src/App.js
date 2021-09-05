@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CandleSticksChartChart from './components/candlesticks/index'
+import BubbleChart from './components/charts/bubble.component'
 import {
   BrowserRouter as Router,
   Switch,
@@ -83,16 +84,14 @@ function MainApp() {
         </div>
         <main>
           <Switch>
-
             {/*** LANDING PAGE ***/}
             <Route path="/">
               <div>
               <CandleSticksChartChart/>
+              <BubbleChart/>
               </div>
-
             </Route>
             {/*** END LANDING PAGE ***/}
-
           </Switch>
         </main>
         {/* Footer */}

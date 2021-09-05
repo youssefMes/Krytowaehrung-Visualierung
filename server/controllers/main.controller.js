@@ -1,6 +1,7 @@
 const restClient = require('../client/client.factory').getRestClient()
 const streamClient = require('../client/client.factory').getStreamClient()
-
+const https = require('https');
+const axios = require("axios");
 
 const getAssetOHLC = async function (req, res) {
     const {pairSymbol} = req.query
@@ -9,19 +10,19 @@ const getAssetOHLC = async function (req, res) {
 }
 
 const getAssetsPrice = async function (req, res) {
-    const {pairs} = req.query
-    let assets = []
-    if (pairs.length > 0) {
-        try {
-            pairs.map(async (pairSymbol) => {
-                assets.push(await restClient.getPrice('kraken', pairSymbol))
-                console.log(assets)
-            })
-            res.send(assets)
-        } catch (error) {
-            res.send(error)
-        }
+    try {
+        axios.get('https://rest.coinapi.io/v1/assets', {
+            headers: {
+                'X-CoinAPI-Key': '8FB737A3-F629-417C-91A4-5C2AB0AB2CF2'
+            }
+        }).then(response => {
+            res.send(response.data)
+        })
+
+    } catch (err) {
+        res.send(err)
     }
+
 }
 
 module.exports = {
