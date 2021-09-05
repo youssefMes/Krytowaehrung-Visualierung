@@ -1,12 +1,10 @@
-import React, {useState, useEffect } from 'react';
-import socketIOClient from "socket.io-client";
+import React, {useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CandleSticksChartChart from './components/candlesticks/index'
 import BubbleChart from './components/charts/bubble.component'
 import {
   BrowserRouter as Router,
   Switch,
-  useHistory,
   Route
 } from "react-router-dom";
 
@@ -27,24 +25,11 @@ import {
 import {Copyright} from './components/copyright/copyright.component';
 import {HeaderBar} from './components/appbar/appbar.component';
 
-const ENDPOINT = "http://localhost:9000";
-
 function MainApp() {
   const classes = useStyles();
-  const [searchText, setSearchText] = useState('');
   const [darkState, setDarkState] = useState(
     localStorage.getItem('darkState') || false
   );
-
-  const [response, setResponse] = useState("");
-
-  // useEffect(() => {
-  //   const socket = socketIOClient(ENDPOINT);
-  //   socket.on("FromAPI", data => {
-  //     console.log(data)
-  //     setResponse(data);
-  //   });
-  // }, []);
 
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? red[500] : lightBlue[500];
@@ -63,12 +48,6 @@ function MainApp() {
 
   const displayAlt = darkState ? "Switch to Light Mode" : "Switch to Dark Mode";
 
-  const [filter, setFilter] = useState({})
-
-  const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
-  };
-
   const handleThemeChange = () => {
     localStorage.setItem('darkState', !darkState);
     setDarkState(!darkState);
@@ -80,7 +59,7 @@ function MainApp() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <div className={classes.root}>
-          <HeaderBar classes={classes} setSearchText={setSearchText} onFilterChange={handleFilterChange} filter={filter} colorSwitch={handleThemeChange} darkState={darkState} displayAlt={displayAlt}/>
+          <HeaderBar classes={classes} colorSwitch={handleThemeChange} darkState={darkState} displayAlt={displayAlt}/>
         </div>
         <main>
           <Switch>
