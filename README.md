@@ -11,4 +11,5 @@ cd Krytowaehrung-Visualierung/server
 yarn install or npm install
 yarn start or npm start 
 ```
-Navigate to http://localhost:3000
+Navigate to http://localhost:3000 <br>
+For more details about the project check [Wiki](https://github.com/youssefMes/Krytowaehrung-Visualierung/wiki)
