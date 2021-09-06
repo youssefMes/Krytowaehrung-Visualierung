@@ -43,13 +43,13 @@ export default class BubbleChart extends React.Component {
             this.minValue =
                 0.95 *
                 d3.min(this.props.data, item => {
-                    return item.data_symbols_count;
+                    return item.price_usd;
                 });
 
             this.maxValue =
                 1.05 *
                 d3.max(this.props.data, item => {
-                    return item.data_symbols_count;
+                    return item.price_usd;
                 });
 
             this.simulatePositions(this.props.data);
@@ -79,7 +79,7 @@ export default class BubbleChart extends React.Component {
             .force(
                 "collide",
                 d3.forceCollide(d => {
-                    return this.radiusScale(d.data_symbols_count) + 2;
+                    return this.radiusScale(d.price_usd) + 2;
                 })
             )
             .on("tick", () => {
@@ -93,13 +93,13 @@ export default class BubbleChart extends React.Component {
         const minValue =
             0.95 *
             d3.min(data, item => {
-                return item.data_symbols_count;
+                return item.price_usd;
             });
 
         const maxValue =
             1.05 *
             d3.max(data, item => {
-                return item.data_symbols_count;
+                return item.price_usd;
             });
 
         const color = d3
@@ -108,45 +108,24 @@ export default class BubbleChart extends React.Component {
             .interpolate(d3.interpolateHcl)
             .range(["#eb001b", "#f79e1b"]);
 
-        // render simple circle element
-        if (!this.props.useLabels) {
-            const circles = _.map(data, (item, index) => {
-                return (
-                    <g
-                    transform={`translate(${item.data_symbols_count/1000}, ${item.data_symbols_count/1000})`}
-                >
-                    <circle
-                        key={index}
-                        r={this.radiusScale(item.data_symbols_count/1000)}
-                        cx={item.x}
-                        cy={item.y}
-                        fill={color(item.data_symbols_count)}
-                        stroke={d3.rgb(color(item.data_symbols_count)).brighter(2)}
-                        strokeWidth="2"
-                    />
-                    </g>
-                );
-            });
-
-            return (
-                circles
-            );
-        }
 
         // render circle and text elements inside a group
         const texts = _.map(data, (item, index) => {
+            console.log(item)
             const props = this.props;
-            const fontSize = this.radiusScale(item.data_symbols_count) / 2;
+            const fontSize = 10;
+            const  numb = parseInt(item.data_symbols_count.toString().substring(0, 2)) +15;
+
             return (
                 <g
                     key={index}
-                    transform={`translate(${props.width / 2 +
-                    item.x}, ${props.height / 2 + item.y})`}
+                    transform={`translate(${props.width / 2 + numb
+                    }, ${props.height / 2 + numb})`}
                 >
                     <circle
-                        r={this.radiusScale(item.data_symbols_count)}
-                        fill={color(item.data_symbols_count)}
-                        stroke={d3.rgb(color(item.data_symbols_count)).brighter(2)}
+                        r={this.radiusScale(numb)}
+                        fill={color(numb)}
+                        stroke={d3.rgb(color(item.price_usd)).brighter(2)}
                         strokeWidth="2"
                     />
                     <text
