@@ -1,4 +1,4 @@
-# Krytowaehrung-Visualierung
+# Visualisation of blockchain data
 This project allows a user to visualise cryptocurrencies data. The target group is for newbie in the cryptocurrency/blockchain, and its not sutable for advanced Analysis of cryptocurrencies.
 
 ### Installation
