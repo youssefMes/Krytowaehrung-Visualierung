@@ -3,9 +3,10 @@ import * as d3 from "d3";
 
 import Candle from "./candle.component";
 import CrossHairs from "./crosshairs.compoenent";
+import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
 const Chart = props => {
-    const { data, width: chart_width, height: chart_height } = props;
+    const { data, width: chart_width, height: chart_height, selectedPair } = props;
 
     const [mouseCoords, setMouseCoords] = useState({
         x: 0,
@@ -87,12 +88,15 @@ const Chart = props => {
                     />
                 );
             })}
-            <text x="10" y="16" fill="white" fontSize="10" color={'black'}>
+            <text x="10" y="16" fill="white" fontSize="10">
                 <tspan>
                     Mouse: {mouseCoords.x}, {mouseCoords.y}
                 </tspan>
                 <tspan x="10" y="30">
                     Dollars: ${dollarAt(mouseCoords.y)}
+                </tspan>
+                <tspan x="10" y="44">
+                    {selectedPair.toUpperCase()}
                 </tspan>
             </text>
             <CrossHairs x={mouseCoords.x} y={mouseCoords.y} chart_dims={chart_dims} />

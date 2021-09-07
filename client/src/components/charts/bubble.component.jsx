@@ -32,7 +32,7 @@ export default class BubbleChart extends React.Component {
         const res = await axios.get('http://localhost:9000/api/asset/price')
         this.setState({data: res.data})
     }
-    
+
     componentWillMount() {
         this.mounted = true;
         this.getData()
@@ -63,7 +63,7 @@ export default class BubbleChart extends React.Component {
     radiusScale = value => {
         const fx = d3
             .scaleSqrt()
-            .range([1, 50])
+            .range([1, 100])
             .domain([this.minValue, this.maxValue]);
 
         return fx(value);
@@ -106,15 +106,14 @@ export default class BubbleChart extends React.Component {
             .scaleLinear()
             .domain([minValue, maxValue])
             .interpolate(d3.interpolateHcl)
-            .range(["#eb001b", "#f79e1b"]);
+            .range(["grey"]);
 
 
         // render circle and text elements inside a group
         const texts = _.map(data, (item, index) => {
-            console.log(item)
             const props = this.props;
             const fontSize = 10;
-            const  numb = parseInt(item.data_symbols_count.toString().substring(0, 2)) +15;
+            const  numb = parseInt(item.price_usd.toString().substring(0, 2)) +15;
 
             return (
                 <g
@@ -129,13 +128,22 @@ export default class BubbleChart extends React.Component {
                         strokeWidth="2"
                     />
                     <text
-                        dy="6"
+                        dy="0"
                         fill="#fff"
                         textAnchor="middle"
                         fontSize={`${fontSize}px`}
                         fontWeight="bold"
                     >
                         {item.name}
+                    </text>
+                    <text
+                        dy="10"
+                        fill="#fff"
+                        textAnchor="middle"
+                        fontSize={`${fontSize}px`}
+                        fontWeight="bold"
+                    >
+                        {item.price_usd.toFixed(2) + ' $'}
                     </text>
                 </g>
             );

@@ -11,13 +11,20 @@ const getAssetOHLC = async function (req, res) {
 
 const getAssetsPrice = async function (req, res) {
     try {
-        axios.get('https://rest.coinapi.io/v1/assets?filter_asset_id=ETH,XRP,ADA,BTC', {
+        axios.get('https://rest.coinapi.io/v1/assets?filter_asset_id=ETH,XRP,ADA,BTC,DOGE,BNB,MATIC', {
             headers: {
-                'X-CoinAPI-Key': '3A09C042-28CB-4640-B89D-1154F310500D'
+                'X-CoinAPI-Key': '8FB737A3-F629-417C-91A4-5C2AB0AB2CF2'
             },
-            
+
         }).then(response => {
-            res.send(response.data)
+            const prices = response.data.map(coin =>  {
+                return {
+                    asset_id: coin.asset_id,
+                    name: coin.name,
+                    price_usd: coin.price_usd
+                }
+            })
+            res.send(prices)
         })
 
     } catch (err) {
