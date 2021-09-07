@@ -43,7 +43,7 @@ export default function BarChart(props) {
     };
     return (
         <div ref={chartRef} style={styles.container}>
-            <h1 style={{ textAlign: "center" }}>Hi, I'm the bar chart :)</h1>
+            <h1 style={{ textAlign: "center" }}>Bar chart</h1>
         </div>
     );
 }

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import axios from 'axios'
+import axios from 'axios';
+
 
 import "../../style/candlesticks.style.css";
-
 import Chart from "./chart.component";
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
@@ -28,8 +28,8 @@ export default function CandleSticksChartChart() {
     }, [selectedPair])
 
     return (
-        <div className="cs">
-            <FormControl style={{float: "left"}}>
+        <div className="my_block">
+            <FormControl style={{float: "left", margin: "5px"}}>
                 <InputLabel id="demo-simple-select-label">BTC/USD</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"

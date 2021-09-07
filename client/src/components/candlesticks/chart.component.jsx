@@ -3,7 +3,6 @@ import * as d3 from "d3";
 
 import Candle from "./candle.component";
 import CrossHairs from "./crosshairs.compoenent";
-import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
 const Chart = props => {
     const { data, width: chart_width, height: chart_height, selectedPair } = props;
@@ -90,7 +89,7 @@ const Chart = props => {
             })}
             <text x="10" y="16" fill="white" fontSize="10">
                 <tspan>
-                    Mouse: {mouseCoords.x}, {mouseCoords.y}
+                    Mouse Position: {mouseCoords.x}, {mouseCoords.y}
                 </tspan>
                 <tspan x="10" y="30">
                     Dollars: ${dollarAt(mouseCoords.y)}

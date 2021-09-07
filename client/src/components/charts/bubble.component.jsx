@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from "d3";
 import _ from "lodash";
 import axios from 'axios'
-
+import "../../style/main.style.css";
 
 // todo refactor to functional component
 export default class BubbleChart extends React.Component {
@@ -155,12 +155,14 @@ export default class BubbleChart extends React.Component {
     render() {
         if (this.state.data.length) {
             return (
-                <svg width={this.props.width} height={this.props.height}>
-                    {this.renderBubbles(this.state.data)}
-                </svg>
+                <div className="bubble_style">
+                    <svg width={this.props.width} height={this.props.height}>
+                        {this.renderBubbles(this.state.data)}
+                    </svg>
+                </div>
             );
         }
 
-        return <div>Loading</div>;
+        return <div className="bubble_style">Loading</div>;
     }
 }

@@ -44,3 +44,11 @@
     stroke-opacity: 70%;
     stroke-dasharray: 3;
 }
+
+.my_block {
+    display: inline-block;
+    padding: 20px;
+    background-color: black;
+    margin: 20px;
+    width: 48%;
+}

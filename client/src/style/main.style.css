@@ -23,3 +23,13 @@
 .MuiFormControl-root .jss26{
     margin: 10px !important;
 }
+.bubble_style{
+    background-color: black;
+    width: 48%;
+    right: 0;
+    position: absolute;
+    height: 345.5px;
+    margin-top: 20px;
+    margin: 20px;
+    display: inline-block;
+}
