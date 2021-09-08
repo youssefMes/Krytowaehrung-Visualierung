@@ -3,7 +3,6 @@ import ReactApexCharts from 'react-apexcharts'
 import axios from "axios";
 import '../../style/main.style.css'
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
-import _ from 'lodash'
 
 class ApexLine extends React.Component {
     constructor(props) {
@@ -56,26 +55,23 @@ class ApexLine extends React.Component {
             }
         })
         const prices = res.data.map(item => item.price)
-        if (!_.isEqual(prices, this.state.series[0].data)) {
-            this.setState({
-                series: [
-                    {
-                        ...this.state.series[0],
-                        data: prices
-                    }
-                ]
-            })
-        }
         const dates = res.data.map(item => item.date)
-        if (!_.isEqual(dates, this.state.options.xaxis.categories)) {
-            this.setState({
-                options: {
-                    ...this.state.options,
-                    xaxis: {
-                        categories: dates
-                    }
-                }})
-        }
+        this.setState({
+            series: [
+                {
+                    ...this.state.series[0],
+                    data: prices
+                }
+            ]
+            })
+        this.setState({
+            options: {
+                ...this.state.options,
+                xaxis: {
+                    categories: dates
+                }
+            }})
+
     }
     componentWillMount() {
         this.getData()

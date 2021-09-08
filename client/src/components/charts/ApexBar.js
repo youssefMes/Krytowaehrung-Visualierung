@@ -22,7 +22,7 @@ class ApexBar extends React.Component {
                     }
                 },
                 dataLabels: {
-                    enabled: false
+                    enabled: true
                 },
                 stroke: {
                     width: 2
