@@ -6,6 +6,7 @@ export default function BarChart(props) {
 
     useEffect(() => {
         if (props.data.length > 0 && chartRef.current.lastChild.tagName !== 'svg') {
+            console.log(props.data)
             const dataset = props.data.map(coin => parseFloat(coin.price_usd).toFixed(2))
             const w = 600;
             const h = 300;

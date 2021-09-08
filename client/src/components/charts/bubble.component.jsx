@@ -100,7 +100,7 @@ export default class BubbleChart extends React.Component {
             .scaleLinear()
             .domain([minValue, maxValue])
             .interpolate(d3.interpolateHcl)
-            .range(["grey"]);
+            .range(["grey", 'darkgrey']);
 
 
         // render circle and text elements inside a group

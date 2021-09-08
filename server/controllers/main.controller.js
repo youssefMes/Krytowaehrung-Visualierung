@@ -43,7 +43,7 @@ const getLineChartData = async function (req, res) {
             const month = months[date.getMonth()];
             const day = date.getDate();
             return {
-                date: el[0],
+                date: day + '-' + month + '-' + year,
                 price: el[1],
             }
         })

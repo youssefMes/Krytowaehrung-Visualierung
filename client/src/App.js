@@ -4,6 +4,8 @@ import CandleSticksChartChart from './components/candlesticks/index'
 import BubbleChart from './components/charts/bubble.component'
 import BarChart from './components/charts/bar.component'
 import Line from './components/charts/line.component'
+import ApexLine from './components/charts/ApexLine'
+import ApexBar from './components/charts/ApexBar'
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,6 +36,8 @@ function MainApp() {
     localStorage.getItem('darkState') || false
   );
   const [data, setData] = useState([]);
+  const [prices, setPrices] = useState([]);
+  const [names, setNames] = useState([]);
     console.log(darkState)
   const palletType =  "light";
   const mainPrimaryColor = darkState ? red[500] : lightBlue[500];
@@ -58,6 +62,10 @@ function MainApp() {
   };
   const getData = async () => {
     const res = await axios.get('http://localhost:9000/api/asset/price')
+    const prices = res.data.map(coin => coin.price_usd)
+    const names = res.data.map(coin => coin.name)
+    setNames(names)
+    setPrices(prices)
     setData(res.data)
   }
   useEffect(() => {
@@ -79,8 +87,8 @@ function MainApp() {
               <div>
               <CandleSticksChartChart/>
               <BubbleChart data={data}/>
-              <BarChart data={data}/>
-              <Line/>
+              <ApexLine/>
+              <ApexBar prices={prices} names={names}/>
               </div>
             </Route>
             {/*** END LANDING PAGE ***/}
