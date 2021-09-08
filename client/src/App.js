@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import CandleSticksChartChart from './components/candlesticks/index'
 import BubbleChart from './components/charts/bubble.component'
 import BarChart from './components/charts/bar.component'
+import Line from './components/charts/line.component'
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,7 +35,7 @@ function MainApp() {
   );
   const [data, setData] = useState([]);
     console.log(darkState)
-  const palletType = darkState ? "dark" : "light";
+  const palletType =  "light";
   const mainPrimaryColor = darkState ? red[500] : lightBlue[500];
   const mainSecondaryColor = darkState ? blueGrey[900] : deepPurple[500];
   const darkTheme = createTheme({
@@ -79,6 +80,7 @@ function MainApp() {
               <CandleSticksChartChart/>
               <BubbleChart data={data}/>
               <BarChart data={data}/>
+              <Line/>
               </div>
             </Route>
             {/*** END LANDING PAGE ***/}

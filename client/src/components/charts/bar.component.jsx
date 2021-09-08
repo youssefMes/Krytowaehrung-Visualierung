@@ -1,12 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import * as d3 from "d3";
 
 export default function BarChart(props) {
-    console.log('props', props)
     const chartRef = useRef(null);
 
     useEffect(() => {
-        if (props.data.length > 0) {
+        if (props.data.length > 0 && chartRef.current.lastChild.tagName !== 'svg') {
             const dataset = props.data.map(coin => parseFloat(coin.price_usd).toFixed(2))
             const w = 600;
             const h = 300;
@@ -31,7 +30,7 @@ export default function BarChart(props) {
                 .attr("width", 50)
                 .attr("height", (d, i) => 7 * d)
                 .append("title")
-                .text(d => d);
+                .text(d => d.asset_id);
         }
     })
 
@@ -42,8 +41,11 @@ export default function BarChart(props) {
         }
     };
     return (
-        <div ref={chartRef} style={styles.container}>
-            <h1 style={{ textAlign: "center" }}>Bar chart</h1>
+        <div className={'my_block'}>
+            <div ref={chartRef} style={styles.container}>
+                <h1 style={{ textAlign: "center" }}>Bar chart</h1>
+            </div>
         </div>
+
     );
 }

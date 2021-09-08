@@ -4,7 +4,6 @@ import _ from "lodash";
 import axios from 'axios'
 import "../../style/main.style.css";
 
-// todo refactor to functional component
 export default class BubbleChart extends React.Component {
     static defaultProps = {
         data: [],
@@ -28,14 +27,9 @@ export default class BubbleChart extends React.Component {
         this.simulatePositions = this.simulatePositions.bind(this);
         this.renderBubbles = this.renderBubbles.bind(this);
     }
-    getData = async () => {
-        const res = await axios.get('http://localhost:9000/api/asset/price')
-        this.setState({data: res.data})
-    }
 
     componentWillMount() {
         this.mounted = true;
-        this.getData()
     }
 
     componentDidMount() {
@@ -153,11 +147,11 @@ export default class BubbleChart extends React.Component {
     };
 
     render() {
-        if (this.state.data.length) {
+        if (this.props.data.length) {
             return (
                 <div className="bubble_style">
                     <svg width={this.props.width} height={this.props.height}>
-                        {this.renderBubbles(this.state.data)}
+                        {this.renderBubbles(this.props.data)}
                     </svg>
                 </div>
             );
