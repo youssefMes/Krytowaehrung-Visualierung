@@ -24,14 +24,17 @@ const Chart = props => {
         dollar_delta: dollar_high - dollar_low
     };
 
+
     const dollarAt = pixel => {
         const dollar =
             (Math.abs(pixel - chart_dims.pixel_height) / chart_dims.pixel_height) *
             chart_dims.dollar_delta +
             chart_dims.dollar_low;
 
-        return pixel > 0 ? dollar.toFixed(2) : "-";
+
+        return pixel > 0 ? dollar.toFixed(6) : "-";
     };
+
 
     const pixelFor = dollar => {
         return Math.abs(
@@ -87,7 +90,7 @@ const Chart = props => {
                     />
                 );
             })}
-            <text x="10" y="16" fill="white" fontSize="10">
+            <text x="10" y="16" fill="black" fontSize="10">
                 <tspan>
                     Mouse Position: {mouseCoords.x}, {mouseCoords.y}
                 </tspan>
