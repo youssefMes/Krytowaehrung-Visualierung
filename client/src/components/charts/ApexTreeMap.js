@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react'
-import ReactApexCharts from 'react-apexcharts'
+import React, {useState} from 'react'
 import TreeMap from "react-d3-treemap";
 import "react-d3-treemap/dist/react.d3.treemap.css";
 
