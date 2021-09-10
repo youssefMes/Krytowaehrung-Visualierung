@@ -13,3 +13,7 @@ yarn start or npm start
 ```
 Navigate to http://localhost:3000 <br>
 For more details about the project check [Wiki](https://github.com/youssefMes/Krytowaehrung-Visualierung/wiki)
+
+
+Project Team <br>
+[Maher Mahouachi](https://github.com/maherwizy) : _Matrikel N°: 11143349_ <br> [Youssef Mestiri](https://github.com/youssefMes) : _Matrikel N°: 11140185_
