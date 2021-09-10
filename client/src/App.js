@@ -6,6 +6,7 @@ import BarChart from './components/charts/bar.component'
 import Line from './components/charts/line.component'
 import ApexLine from './components/charts/ApexLine'
 import ApexBar from './components/charts/ApexBar'
+import ApexBubble from './components/charts/ApexBubble'
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,7 @@ import {
 import {Copyright} from './components/copyright/copyright.component';
 import {HeaderBar} from './components/appbar/appbar.component';
 import axios from "axios";
+import ApexTreeMap from "./components/charts/ApexTreeMap";
 
 function MainApp() {
   const classes = useStyles();
@@ -68,6 +70,17 @@ function MainApp() {
     setPrices(prices)
     setData(res.data)
   }
+  const prepareTreeMap = () => {
+    if (data.length > 0) {
+      return data.map(coin => {
+        return {
+          name: coin.name,
+          value: coin.price_usd > 30000 ? coin.price_usd / 1 : coin.price_usd
+        }
+      })
+    }
+  }
+
   useEffect(() => {
     getData()
   }, [])
@@ -89,6 +102,7 @@ function MainApp() {
               <BubbleChart data={data}/>
               <ApexLine/>
               <ApexBar prices={prices} names={names}/>
+                {data.length > 0 && <ApexTreeMap data={prepareTreeMap()}/>}
               </div>
             </Route>
             {/*** END LANDING PAGE ***/}

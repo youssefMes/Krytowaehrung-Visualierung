@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from "d3";
+import {forceSimulation} from 'd3-force'
 import _ from "lodash";
 import axios from 'axios'
 import "../../style/main.style.css";
@@ -49,7 +50,6 @@ export default class BubbleChart extends React.Component {
             this.simulatePositions(this.props.data);
         }
     }
-
     componentWillUnmount() {
         this.mounted = false;
     }

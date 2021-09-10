@@ -40,7 +40,7 @@ const getLineChartData = async function (req, res) {
             const date = new Date(el[0]);
             const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             const year = date.getFullYear();
-            const month = months[date.getMonth()];
+            const month = date.getMonth();
             const day = date.getDate();
             return {
                 date: day + '-' + month + '-' + year,
